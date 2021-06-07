@@ -18,6 +18,6 @@ class FailedResultException extends Exception
      */
     public function render($request): JsonResponse
     {
-        return self::response([], ResultCode::FAILED_RESULT, $this->getMessage());
+        return $this->response([], ResultCode::FAILED_RESULT, $this->getMessage());
     }
 }

@@ -19,7 +19,7 @@ trait Response
      *
      * @return JsonResponse
      */
-    public static function response($data, int $code = ResultCode::SUCCESS, string $message = null): JsonResponse
+    public function response($data, int $code = ResultCode::SUCCESS, string $message = null): JsonResponse
     {
         return new JsonResponse([
             'result_code'    => $code,

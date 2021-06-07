@@ -5,13 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Components\Request\DataTransfer;
 use App\Exceptions\FailedResultException;
 use App\Http\Controllers\Controller;
-use App\Http\Validations\User\UserStoreValidate;
-use App\Http\Validations\User\UserUpdateValidate;
+use App\Http\Requests\User\UserCreateRequest;
+use App\Http\Requests\User\UserUpdateRequest;
 use App\Models\User\User;
 use App\Repositories\User\UserRepository;
 use App\Services\User\UserStoreService;
 use App\Services\User\UserUpdateService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -34,39 +33,24 @@ class UserController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index()
-    {
-        $query = $this->userRepository->query();
-
-        return self::response($query->customPaginate());
-    }
-
-    /**
-     * @param Request $request
-     * @param User    $user
+     * @param UserCreateRequest $request
+     * @param User              $user
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws FailedResultException
-     * @throws \Illuminate\Validation\ValidationException
      * @throws \Throwable
      */
-    public function store(Request $request, User $user)
+    public function store(UserCreateRequest $request, User $user)
     {
-        $data = $request->post();
-
-        UserStoreValidate::validate($request);
-
         DB::beginTransaction();
 
         try {
 
-            if (!(new UserStoreService($user, new DataTransfer($data)))->run()) {
+            if ((new UserStoreService($user, new DataTransfer($request->post())))->run()) {
 
                 DB::commit();
 
-                return self::response($user->refresh());
+                return $this->response($user->refresh());
             }
 
             throw new FailedResultException();
@@ -80,6 +64,16 @@ class UserController extends Controller
     }
 
     /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index()
+    {
+        $query = $this->userRepository->query();
+
+        return $this->response($query->customPaginate());
+    }
+
+    /**
      * @param $id
      *
      * @return \Illuminate\Http\JsonResponse
@@ -89,24 +83,21 @@ class UserController extends Controller
     {
         $user = $this->userRepository->getById($id);
 
-        return self::response($user);
+        return $this->response($user);
     }
 
     /**
-     * @param Request $request
-     * @param         $id
+     * @param UserUpdateRequest $request
+     * @param                   $id
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws FailedResultException
      * @throws \App\Exceptions\RecordNotFoundException
-     * @throws \Illuminate\Validation\ValidationException
      * @throws \Throwable
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         $user = $this->userRepository->getById($id);
-
-        UserUpdateValidate::validate($request);
 
         DB::beginTransaction();
 
@@ -116,7 +107,7 @@ class UserController extends Controller
 
                 DB::commit();
 
-                return self::response($user->refresh());
+                return $this->response($user->refresh());
             }
 
             throw new FailedResultException();
@@ -141,6 +132,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return self::response([]);
+        return $this->response([]);
     }
 }

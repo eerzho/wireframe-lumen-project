@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "080e929074bb7be513e0dbf6e3ee8b31",
+    "content-hash": "a414e5b56b6b3a5a2eb99cad6a4d766b",
     "packages": [
         {
             "name": "brick/math",
@@ -4641,6 +4641,45 @@
             "time": "2021-05-27T12:28:50+00:00"
         },
         {
+            "name": "urameshibr/lumen-form-request",
+            "version": "1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/urameshibr/lumen-form-request.git",
+                "reference": "c540dbafed07fb71a6478478e8a4770ae7ff7105"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/urameshibr/lumen-form-request/zipball/c540dbafed07fb71a6478478e8a4770ae7ff7105",
+                "reference": "c540dbafed07fb71a6478478e8a4770ae7ff7105",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.4"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Urameshibr\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Laravel Form Request adaptation for Lumen framework.",
+            "keywords": [
+                "form",
+                "lumen",
+                "request"
+            ],
+            "support": {
+                "issues": "https://github.com/urameshibr/lumen-form-request/issues",
+                "source": "https://github.com/urameshibr/lumen-form-request/tree/1.5"
+            },
+            "time": "2018-10-18T00:07:29+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.3.0",
             "source": {
@@ -7003,7 +7042,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0"
+        "php": "7.4.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

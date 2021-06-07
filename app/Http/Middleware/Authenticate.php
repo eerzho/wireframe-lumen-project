@@ -41,7 +41,7 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            return self::response([], ResultCode::UNAUTHORIZED);
+            return $this->response([], ResultCode::UNAUTHORIZED);
         }
 
         return $next($request);

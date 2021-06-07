@@ -1,12 +1,20 @@
 <?php
 
-namespace App\Http\Validations\User;
+namespace App\Http\Requests\User;
 
-use App\Http\Validations\Validation;
+use App\Http\Requests\Request;
+use Illuminate\Validation\Rule;
 
-class UserUpdateValidate extends Validation
+/**
+ * Class UserUpdateRequest
+ * @package App\Http\Requests\User
+ */
+class UserUpdateRequest extends Request
 {
-    public static function rules(): array
+    /**
+     * @return array
+     */
+    public function rules()
     {
         return [
             'name' => [
@@ -21,6 +29,7 @@ class UserUpdateValidate extends Validation
                 'email',
                 'min:3',
                 'max:255',
+                Rule::unique('users', 'email')->ignore($this->segment(2))
             ]
         ];
     }

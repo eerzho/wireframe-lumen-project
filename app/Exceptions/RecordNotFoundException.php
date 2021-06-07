@@ -18,6 +18,6 @@ class RecordNotFoundException extends Exception
      */
     public function render($request): JsonResponse
     {
-        return self::response([], ResultCode::NOT_FOUND, $this->getMessage());
+        return $this->response([], ResultCode::NOT_FOUND, $this->getMessage());
     }
 }

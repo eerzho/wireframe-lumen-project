@@ -1,38 +1,40 @@
 <?php
 
-namespace App\Http\Validations\User;
+namespace App\Http\Requests\User;
 
-use App\Http\Validations\Validation;
+use App\Http\Requests\Request;
+use Illuminate\Validation\Rule;
 
 /**
- * Class UserStoreValidate
- * @package App\Http\Validations\User
+ * Class UserCreateRequest
+ * @package App\Http\Requests\User
  */
-class UserStoreValidate extends Validation
+class UserCreateRequest extends Request
 {
     /**
      * @return \string[][]
      */
-    public static function rules(): array
+    public function rules()
     {
         return [
-            'name'     => [
+            'name' => [
                 'required',
                 'string',
                 'min:3',
                 'max:255',
             ],
-            'email'    => [
+            'email' => [
                 'required',
                 'string',
                 'email',
                 'min:3',
                 'max:255',
+                Rule::unique('users', 'email'),
             ],
             'password' => [
                 'required',
                 'string',
-                'min:3',
+                'min:6',
                 'max:255',
             ]
         ];
