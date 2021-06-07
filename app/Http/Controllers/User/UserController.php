@@ -33,6 +33,16 @@ class UserController extends Controller
     }
 
     /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index()
+    {
+        $query = $this->userRepository->query();
+
+        return $this->response($query->customPaginate());
+    }
+
+    /**
      * @param UserCreateRequest $request
      * @param User              $user
      *
@@ -61,16 +71,6 @@ class UserController extends Controller
 
             throw $exception;
         }
-    }
-
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index()
-    {
-        $query = $this->userRepository->query();
-
-        return $this->response($query->customPaginate());
     }
 
     /**
