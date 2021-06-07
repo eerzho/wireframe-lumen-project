@@ -3,7 +3,8 @@
 namespace App\Http\Validations;
 
 use App\Components\Constants\ResultCode;
-use App\Traits\Response;
+use App\Traits\Response\Response;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -21,13 +22,13 @@ abstract class Validation
     abstract public static function rules(): array;
 
     /**
-     * @param array $data
+     * @param Request $request
      *
      * @throws ValidationException
      */
-    public static function validate(array $data)
+    public static function validate(Request $request)
     {
-        $validator = Validator::make($data, static::rules());
+        $validator = Validator::make($request->post(), static::rules());
 
         if ($validator->fails()) {
             $response = static::response($validator->getMessageBag(), ResultCode::VALIDATION_ERROR);

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\Response;
+use App\Traits\Response\Response;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 /**

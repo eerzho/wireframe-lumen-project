@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group([
-//        'middleware' => 'auth',
+    //        'middleware' => 'auth',
 ], function () use ($router) {
     $router->group([
         'prefix'    => 'users',
@@ -26,5 +26,7 @@ $router->group([
         $router->get('/', 'UserController@index');
         $router->post('/', 'UserController@store');
         $router->get('/{id}', 'UserController@show');
+        $router->put('/{id}', 'UserController@update');
+        $router->delete('/{id}', 'UserController@destroy');
     });
 });

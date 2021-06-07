@@ -3,7 +3,6 @@
 namespace App\Models\User;
 
 use App\Models\Model;
-use App\Traits\TableName;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;

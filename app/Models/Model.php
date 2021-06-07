@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\TableName;
+use App\Traits\ScopePaginate\ScopePaginate;
 
 /**
  * Class Model
@@ -13,5 +13,5 @@ use App\Traits\TableName;
  */
 class Model extends \Illuminate\Database\Eloquent\Model
 {
-    use TableName;
+    use ScopePaginate;
 }

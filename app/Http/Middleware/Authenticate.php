@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Components\Constants\ResultCode;
-use App\Traits\Response;
+use App\Traits\Response\Response;
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
 

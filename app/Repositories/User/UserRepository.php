@@ -26,6 +26,6 @@ class UserRepository extends Repository
      */
     public function getByName($name)
     {
-        return $this->table()->where('name', 'LIKE', '%' . $name . '%')->first();
+        return $this->query()->where('name', 'LIKE', '%' . $name . '%')->first();
     }
 }

@@ -3,7 +3,8 @@
 namespace App\Repositories;
 
 use App\Exceptions\RecordNotFoundException;
-use Illuminate\Support\Facades\DB;
+use App\Models\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -29,16 +30,24 @@ abstract class Repository
     }
 
     /**
+     * @return mixed
+     */
+    public function query()
+    {
+        return clone $this->model::query();
+    }
+
+    /**
      * @param $id
      *
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
+     * @return Model
      * @throws RecordNotFoundException
      */
     public function getById($id)
     {
         $this->checkId($id);
 
-        return $this->table()->where('id', $id)->first();
+        return $this->query()->where('id', $id)->first() ?: throw new RecordNotFoundException();
     }
 
     /**
@@ -65,17 +74,9 @@ abstract class Repository
     {
         $validator = Validator::make(
             ['variable' => $variable],
-            ['variable' => ['required', 'integer',]]
+            ['variable' => ['required', 'integer']]
         );
 
         return !$validator->fails();
-    }
-
-    /**
-     * @return \Illuminate\Database\Query\Builder
-     */
-    public function table()
-    {
-        return DB::table($this->model::getTableName());
     }
 }

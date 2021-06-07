@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Traits\Response;
+use App\Traits\Response\Response;
 use Illuminate\Http\JsonResponse;
 
 /**
